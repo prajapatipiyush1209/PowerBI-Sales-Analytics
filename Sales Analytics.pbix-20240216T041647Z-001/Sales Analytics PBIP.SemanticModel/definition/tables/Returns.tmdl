@@ -1,0 +1,56 @@
+table Returns
+	lineageTag: af8c5ad8-2b8a-4bc1-820f-221db412c8fe
+
+	measure 'Return rate' = DIVIDE(COUNT(Returns[Order ID]),DISTINCTCOUNT(Orders[Order ID]))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 0e021645-b637-46c8-a5a9-1cf29682d58b
+
+	column 'Return Value' = CALCULATE(SUM(Orders[Sales]),FILTER(Orders,Orders[Order ID]= Returns[Order ID]))
+		dataType: double
+		lineageTag: 380e28c3-adcd-4b51-bc46-08967513f403
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Returned
+		dataType: string
+		lineageTag: 58ab9493-5e1b-475a-8048-1f9daf407891
+		summarizeBy: none
+		sourceColumn: Returned
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order ID'
+		dataType: string
+		lineageTag: 3b8b60be-9947-4d4b-ad5f-8f13777d7ec9
+		summarizeBy: none
+		sourceColumn: Order ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Return Qty' = CALCULATE(SUM(Orders[Quantity]),FILTER(Orders,Orders[Order ID]= Returns[Order ID]))
+		dataType: double
+		formatString: 0
+		lineageTag: c9559481-81ce-4de0-8fdb-95c255474ecc
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Returns = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Qtech\Downloads\Sample - Superstore (1).xls"), null, true),
+				    Returns1 = Source{[Name="Returns"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Returns1,{{"Column1", type text}, {"Column2", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Returned", type text}, {"Order ID", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_ResultType = Table
+
