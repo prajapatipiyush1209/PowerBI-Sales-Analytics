@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Sales Analytics PBIT"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "035a08b6-f289-49ee-9c47-ebd81da0637f"
+  }
+}
