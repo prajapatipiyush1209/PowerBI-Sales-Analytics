@@ -20,7 +20,7 @@ table Orders
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 5776a9e6-ae37-426d-b798-76256329fe9d
 
-	measure 'nEW mEASURE' = "Hello World"
+	measure 'New Measure Change' = "Hello World"
 		lineageTag: 1f942d5c-bc2f-4e4b-9b0a-499bff5a5e70
 
 	column 'Row ID'
