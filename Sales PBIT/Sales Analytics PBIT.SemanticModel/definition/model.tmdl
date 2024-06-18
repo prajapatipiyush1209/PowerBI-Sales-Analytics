@@ -1,0 +1,25 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Orders","People","Returns"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.130.754.0 (24.06)
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Orders
+ref table DateTableTemplate_bcfada9c-dce1-4e87-82db-188fe78a4c92
+ref table People
+ref table Returns
+ref table LocalDateTable_bc16b94d-f40a-4b8b-aeff-9537e5d165b5
+ref table LocalDateTable_9bf06c3b-1a79-4bc3-8c25-4e05a2a98845
+
+ref cultureInfo en-US
+
